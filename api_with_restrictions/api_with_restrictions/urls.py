@@ -3,10 +3,10 @@ from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
 
-from advertisements.views import home
+from advertisements.views import *
 
 router = DefaultRouter()
-# TODO: подключите `AdvertisementViewSet`
+router.register('advertisements', AdvertisementViewSet)
 
 
 urlpatterns = [

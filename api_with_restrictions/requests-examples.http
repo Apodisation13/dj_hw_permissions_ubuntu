@@ -1,15 +1,15 @@
 # примеры API-запросов
 
 # получение объявлений
-GET https://localhost:8000/api/advertisements/
+GET http://localhost:8000/api/advertisements/
 Content-Type: application/json
 
 ###
 
 # создание объявления
-POST https://localhost:8000/api/advertisements/
+POST http://localhost:8000/api/advertisements/
 Content-Type: application/json
-Authorization: Token 902ef055a9ac93f18327f1f9c45ab059f1a62c7d
+Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
 {
   "title": "Шкаф IKEA",
@@ -18,10 +18,22 @@ Authorization: Token 902ef055a9ac93f18327f1f9c45ab059f1a62c7d
 
 ###
 
-# попытка поменять объявление
-PATCH https://localhost:8000/api/advertisements/1/
+# создание объявления юзер test
+POST http://localhost:8000/api/advertisements/
 Content-Type: application/json
-Authorization: Token 902ef055a9ac93f18327f1f9c45ab059f1a62c7d
+Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
+
+{
+  "title": "Бумер",
+  "description": "Налетай братва"
+}
+
+###
+
+# попытка поменять объявление
+PATCH http://localhost:8000/api/advertisements/1/
+Content-Type: application/json
+Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
 {
   "status": "CLOSED"
@@ -29,12 +41,29 @@ Authorization: Token 902ef055a9ac93f18327f1f9c45ab059f1a62c7d
 
 ###
 
+# попытка поменять объявление 2
+PATCH http://localhost:8000/api/advertisements/1/
+Content-Type: application/json
+Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
+
+{
+  "status": "OPEN"
+}
+
+###
+
 # фильтрация по создателю
-GET https://localhost:8000/api/advertisements/?creator=3
+GET http://localhost:8000/api/advertisements/?search=2
 Content-Type: application/json
 
 ###
 
-# фильтрация по дате
-GET https://localhost:8000/api/advertisements/?created_at_before=2020-10-01
+# фильтрация по дате - before
+GET http://localhost:8000/api/advertisements/?created_at_before=2021-08-01
+Content-Type: application/json
+
+###
+
+# фильтрация по дате 2 - after
+GET http://localhost:8000/api/advertisements/?created_at_after=2021-08-01
 Content-Type: application/json
