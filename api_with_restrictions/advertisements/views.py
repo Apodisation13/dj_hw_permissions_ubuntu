@@ -15,7 +15,7 @@ def home(request):
 class AdvertisementViewSet(ModelViewSet):
     """ViewSet для объявлений."""
 
-    queryset = Advertisement.objects.all().select_related('creator')  # SELECT_RELATED
+    queryset = Advertisement.objects.all().select_related('creator')
     serializer_class = AdvertisementSerializer
 
     search_fields = ['creator__id', 'status']
@@ -32,3 +32,12 @@ class AdvertisementViewSet(ModelViewSet):
         elif self.action == 'create':
             return [IsAuthenticated()]
         return []
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            q1 = Advertisement.objects.exclude(status='DRAFT').select_related('creator')
+            q2 = Advertisement.objects.filter(creator__id=self.request.user.id, status='DRAFT').select_related('creator')
+            queryset = q1 | q2
+        else:
+            queryset = Advertisement.objects.filter(status__in=['OPEN', 'CLOSED']).select_related('creator')
+        return queryset

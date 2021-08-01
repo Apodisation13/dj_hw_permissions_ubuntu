@@ -41,13 +41,15 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             raise ValidationError({'detail': 'Можно иметь не более десяти открытых объявлений'})
         return data
 
-    # def validate_title(self, value):
-    #     """проверить поле title - например на 5 символов, ОБЯЗАТЕЛЬНО РЕТЁРН"""
-    #     if len(value) > 5:
-    #         raise ValidationError('Нельзя больше 5 символов')
-    #     return value
+    @staticmethod
+    def validate_title(value):
+        """проверить поле title - например на 50 символов, ОБЯЗАТЕЛЬНО РЕТЁРН"""
+        if len(value) > 50:
+            raise ValidationError('Нельзя больше 50 символов')
+        return value
 
-    def validate_description(self, value):
+    @staticmethod
+    def validate_description(value):
         """проверить поле description - например что нельзя мат, ОБЯЗАТЕЛЬНО РЕТЁРН"""
         if 'ХРЕН' in value:
             raise ValidationError('Нельзя мат')

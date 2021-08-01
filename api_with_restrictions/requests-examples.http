@@ -1,8 +1,15 @@
 # примеры API-запросов
 
-# получение объявлений
+# получение объявлений от незарегенного юзера
 GET http://localhost:8000/api/advertisements/
 Content-Type: application/json
+
+###
+
+# получение объявлений от юзера
+GET http://localhost:8000/api/advertisements/
+Content-Type: application/json
+Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
 
 ###
 
@@ -16,14 +23,26 @@ Content-Type: application/json
 }
 ###
 
+# создание объявления АДМИН проверка валидации
+POST http://localhost:8000/api/advertisements/
+Content-Type: application/json
+Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
+
+{
+  "title": "Типа приличиный тайтл",
+  "description": "А вот здесь попался ХРЕН вам"
+}
+
+###
 # создание объявления АДМИН
 POST http://localhost:8000/api/advertisements/
 Content-Type: application/json
 Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
 {
-  "title": "Приличный пользователь",
-  "description": "Неприличное сообщение вам"
+  "title": "Тест Драфта",
+  "description": "Черновик",
+  "status": "DRAFT"
 }
 
 ###
@@ -35,7 +54,9 @@ Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
 
 {
   "title": "test",
-  "description": "Прикол"
+  "description": "Прикол",
+  "status": "DRAFT"
+
 }
 
 ###
@@ -105,8 +126,22 @@ Content-Type: application/json
 
 ###
 
+# фильтрация по статусу админ
+GET http://localhost:8000/api/advertisements/?search=DRAFT
+Content-Type: application/json
+Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
+
+###
+
+# фильтрация по статусу юзер
+GET http://localhost:8000/api/advertisements/?search=DRAFT
+Content-Type: application/json
+Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
+
+###
+
 # фильтрация по дате - before
-GET http://localhost:8000/api/advertisements/?created_at_before=2021-08-01
+GET http://localhost:8000/api/advertisements/?created_at_before=2021-07-31
 Content-Type: application/json
 
 ###
