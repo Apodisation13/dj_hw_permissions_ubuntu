@@ -6,14 +6,24 @@ Content-Type: application/json
 
 ###
 
-# создание объявления
+# создание объявления неаутентифицированного пользователя
+POST http://localhost:8000/api/advertisements/
+Content-Type: application/json
+
+{
+  "title": "Попытка",
+  "description": "Я не залоген"
+}
+###
+
+# создание объявления АДМИН
 POST http://localhost:8000/api/advertisements/
 Content-Type: application/json
 Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
 {
-  "title": "Шкаф IKEA",
-  "description": "Срочно"
+  "title": "Приличный пользователь",
+  "description": "Неприличное сообщение вам"
 }
 
 ###
@@ -24,8 +34,8 @@ Content-Type: application/json
 Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
 
 {
-  "title": "Бумер",
-  "description": "Налетай братва"
+  "title": "test",
+  "description": "Прикол"
 }
 
 ###
@@ -49,6 +59,13 @@ Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 {
   "status": "OPEN"
 }
+
+###
+
+# удаление объявления (может только владелец)
+DELETE http://localhost:8000/api/advertisements/15/
+Content-Type: application/json
+Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
 
 ###
 
