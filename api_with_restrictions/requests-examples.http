@@ -40,8 +40,8 @@ Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
 
 ###
 
-# попытка поменять объявление
-PATCH http://localhost:8000/api/advertisements/1/
+# попытка поменять объявление админ-админ
+PATCH http://localhost:8000/api/advertisements/17/
 Content-Type: application/json
 Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
@@ -51,6 +51,16 @@ Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
 ###
 
+# попытка поменять юзером объявление админа
+PATCH http://localhost:8000/api/advertisements/16/
+Content-Type: application/json
+Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
+
+{
+  "status": "CLOSED"
+}
+
+###
 # попытка поменять объявление 2
 PATCH http://localhost:8000/api/advertisements/1/
 Content-Type: application/json
@@ -62,15 +72,35 @@ Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
 
 ###
 
-# удаление объявления (может только владелец)
+# удаление своего объявления от юзера
 DELETE http://localhost:8000/api/advertisements/15/
 Content-Type: application/json
 Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
 
 ###
 
+# попытка удаления юзером сообщения админа
+DELETE http://localhost:8000/api/advertisements/17/
+Content-Type: application/json
+Authorization: Token 9d7dfd8f2ee407299785b65b3a6b224a1d858e12
+
+###
+
+# удаление сообщения юзера - админом
+DELETE http://localhost:8000/api/advertisements/14/
+Content-Type: application/json
+Authorization: Token f1c493379e1ca244d865a1527e2912d62b7609a3
+
+###
+
 # фильтрация по создателю
 GET http://localhost:8000/api/advertisements/?search=2
+Content-Type: application/json
+
+###
+
+# фильтрация по статусу
+GET http://localhost:8000/api/advertisements/?search=CLOSED
 Content-Type: application/json
 
 ###
