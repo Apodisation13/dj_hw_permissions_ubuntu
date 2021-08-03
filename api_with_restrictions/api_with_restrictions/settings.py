@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'api_with_restrictions.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-with open('D:\Python Projects\dj_hw_drf_1\simple_crud\simple_crud\password.txt') as file:
+with open('/home/james/Документы/password.txt') as file:
     PASSWORD = file.readline()
 
 DATABASES = {
